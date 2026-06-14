@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diossmer Villamizar | Desarrollador Backend</title>
+    <meta name="description"
+        content="Portafolio técnico de Diossmer Villamizar, Ingeniero de Software especializado en arquitecturas escalables, sistemas transaccionales y APIs.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Inter:wght@300;400;600;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="bg-grid"></div>
+    <div class="glow-cursor"></div>
+
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="#hero" class="logo">DV</a>
+            <ul class="nav-links">
+                <li><a href="#proyectos">Proyectos</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <!-- HERO SECTION -->
+        <section id="hero" class="hero">
+            <div class="hero-content">
+                <div class="badge">Disponible para nuevos retos</div>
+                <h1 class="hero-title">Diossmer <span class="highlight">Villamizar</span></h1>
+                <h2 class="hero-subtitle">Desarrollador Backend & Ingeniero de Software</h2>
+                <p class="hero-value">Especializado en arquitecturas escalables, sistemas transaccionales y desarrollo
+                    de APIs limpias. Transformando complejidad técnica en rendimiento puro.</p>
+
+                <div class="hero-cta">
+                    <a href="#proyectos" class="btn btn-primary">Ver Casos de Estudio <i
+                            class="fa-solid fa-arrow-right"></i></a>
+                    <!-- Descarga directa desde el almacén interno -->
+                    <a href="assets/CV_Diossmer_Villamizar_2026.pdf" download="CV_Diossmer_Villamizar_2026.pdf"
+                        class="btn btn-secondary"><i class="fa-solid fa-download"></i> Descargar CV</a>
+                </div>
+
+                <div class="hero-socials">
+                    <a href="https://github.com/Diossmer" target="_blank" aria-label="GitHub"><i
+                            class="fa-brands fa-github"></i></a>
+                    <a href="https://gitlab.com/Diossmer" target="_blank" aria-label="GitLab"><i
+                            class="fa-brands fa-gitlab"></i></a>
+                    <a href="https://www.linkedin.com/in/diossmer-villamizar-56bba879/" target="_blank"
+                        aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="code-window">
+                    <div class="code-header">
+                        <span class="dot red"></span>
+                        <span class="dot yellow"></span>
+                        <span class="dot green"></span>
+                        <span class="filename">server.java</span>
+                    </div>
+                    <pre><code class="language-java">
+@RestController
+@RequestMapping("/api/v1/transactions")
+public class TransactionController {
+
+    private final CommandGateway commandGateway;
+
+    @PostMapping("/process")
+    public CompletableFuture&lt;ResponseEntity&lt;?&gt;&gt; process(
+        @RequestBody ProcessPaymentCommand cmd
+    ) {
+        return commandGateway.send(cmd)
+            .thenApply(res -> ResponseEntity.ok().build());
+    }
+}
+                    </code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROYECTOS SECTION -->
+        <section id="proyectos" class="projects">
+            <h2 class="section-title">Casos de <span class="highlight">Estudio</span></h2>
+            <p class="section-subtitle">Arquitecturas y soluciones técnicas de alta complejidad.</p>
+
+            <div class="project-grid">
+                <!-- Proyecto 1: Pasarelas -->
+                <article class="project-card reveal">
+                    <div class="project-info">
+                        <h3>1. Motor de Pasarelas de Pago Unificadas <b class="alert-text">(Código Privado)</b></h3>
+                        <p class="context"><strong>Contexto:</strong> Integración técnica de pasarela de pago (Stripe)
+                            en un sistema centralizado.</p>
+                        <p class="problem"><strong>El Problema y la Solución:</strong> La latencia y pérdida de datos en
+                            transacciones concurrentes. Se resolvió implementando una arquitectura basada en Stripe
+                            Webhooks para el procesamiento asíncrono y en tiempo real, garantizando consistencia
+                            transaccional.</p>
+
+                        <div class="tech-stack">
+                            <span class="tech-tag">Java</span>
+                            <span class="tech-tag">Spring Boot</span>
+                            <span class="tech-tag">Stripe API</span>
+                            <span class="tech-tag">Webhooks</span>
+                        </div>
+
+                        <div class="project-links">
+                            <a href="https://github.com/Diossmer" target="_blank" class="link-btn"><i
+                                    class="fa-brands fa-github"></i> Código Fuente</a>
+                        </div>
+                    </div>
+                    <div class="project-visual">
+                        <div class="diagram-container">
+                            <div class="mermaid">
+                                sequenceDiagram
+                                participant C as Cliente
+                                participant API as Spring Boot API
+                                participant S as Stripe
+                                participant DB as PostgreSQL
+
+                                C->>API: Iniciar Pago
+                                API->>S: Crear Intent
+                                S-->>API: Client Secret
+                                API-->>C: Confirmación
+                                C->>S: Pagar con Tarjeta
+                                S->>API: Webhook (payment_intent.succeeded)
+                                API->>DB: Actualizar Estado a Pagado
+                                API-->>S: 200 OK
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Proyecto 2: Asistencias KPIs -->
+                <article class="project-card reverse reveal">
+                    <div class="project-info">
+                        <h3>2. Sistema Core de Control de Asistencias <b class="alert-text">(KPIs)</b></h3>
+                        <p class="context"><strong>Contexto:</strong> Plataforma corporativa de monitoreo operacional y
+                            KPIs.</p>
+                        <p class="problem"><strong>El Problema y la Solución:</strong> El sistema anterior no soportaba
+                            el alto volumen de registros concurrentes. Rediseñé el núcleo utilizando principios CQRS y
+                            Event Sourcing con Axon Framework para separar la escritura pesada de las consultas de
+                            lectura rápida.</p>
+
+                        <div class="tech-stack">
+                            <span class="tech-tag">Java</span>
+                            <span class="tech-tag">Axon Framework</span>
+                            <span class="tech-tag">CQRS</span>
+                            <span class="tech-tag">Event Sourcing</span>
+                        </div>
+
+                        <div class="project-links">
+                            <a href="https://gitlab.com/Diossmer" target="_blank" class="link-btn"><i
+                                    class="fa-brands fa-gitlab"></i> Repositorio</a>
+                        </div>
+                    </div>
+                    <div class="project-visual">
+                        <div class="diagram-container">
+                            <div class="mermaid">
+                                flowchart LR
+                                A[Cliente] -->|Comando| B(Command Bus)
+                                B --> C{Aggregate}
+                                C -->|Evento| D(Event Store)
+                                D -->|Publica| E(Event Bus)
+                                E --> F[Proyector]
+                                F --> G[(Read DB)]
+                                A -.->|Query| G
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Proyecto 3: Rastreo -->
+                <article class="project-card reveal">
+                    <div class="project-info">
+                        <h3>3. Rastreo de Cuentas Business <b class="alert-text">(WhatsApp/Telegram)</b></h3>
+                        <p class="context"><strong>Contexto:</strong> API y servicio de backend para una aplicación
+                            Android de monitoreo y rastreo.</p>
+                        <p class="problem"><strong>El Problema y la Solución:</strong> Dificultad para homogeneizar
+                            datos de distintas APIs de mensajería. Desarrollé microservicios en Laravel que normalizan y
+                            rutean la data de forma eficiente hacia el cliente móvil, asegurando alta disponibilidad.
+                        </p>
+
+                        <div class="tech-stack">
+                            <span class="tech-tag">PHP</span>
+                            <span class="tech-tag">Laravel</span>
+                            <span class="tech-tag">Microservicios</span>
+                            <span class="tech-tag">Android API</span>
+                        </div>
+
+                        <div class="project-links">
+                            <a href="https://github.com/Diossmer" target="_blank" class="link-btn"><i
+                                    class="fa-brands fa-github"></i> Ver Detalles</a>
+                        </div>
+                    </div>
+                    <div class="project-visual">
+                        <div class="diagram-container">
+                            <div class="mermaid">
+                                flowchart TD
+                                A[App Android] -->|REST API| B(API Gateway)
+                                B --> C[Servicio WhatsApp]
+                                B --> D[Servicio Telegram]
+                                C --> E[(MariaDB)]
+                                D --> E
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Proyecto 4: Inventario -->
+                <article class="project-card reverse reveal">
+                    <div class="project-info">
+                        <h3>4. Motor de Inventario Administrativo</h3>
+                        <p class="context"><strong>Contexto:</strong> Sistema de gestión de inventarios y logística para
+                            operaciones empresariales.</p>
+                        <p class="problem"><strong>El Problema y la Solución:</strong> Consultas lentas por mala
+                            estructuración de datos. Realicé un modelado y normalización exhaustiva de bases de datos
+                            relacionales, bajando los tiempos de respuesta del lado del servidor de segundos a
+                            milisegundos.</p>
+
+                        <div class="tech-stack">
+                            <span class="tech-tag">PostgreSQL</span>
+                            <span class="tech-tag">MariaDB</span>
+                            <span class="tech-tag">SQL Tuning</span>
+                            <span class="tech-tag">Vercel</span>
+                        </div>
+
+                        <div class="project-links">
+                            <a href="https://github.com/Diossmer" target="_blank" class="link-btn"><i
+                                    class="fa-brands fa-github"></i> Explorar DB Flow</a>
+                        </div>
+                    </div>
+                    <div class="project-visual">
+                        <div class="diagram-container">
+                            <div class="mermaid">
+                                erDiagram
+                                PRODUCTO ||--o{ MOVIMIENTO : genera
+                                ALMACEN ||--o{ MOVIMIENTO : registra
+                                PRODUCTO {
+                                uuid id
+                                string sku
+                                int stock_actual
+                                }
+                                MOVIMIENTO {
+                                uuid id
+                                string tipo
+                                timestamp fecha
+                                }
+                                ALMACEN {
+                                uuid id
+                                string ubicacion
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- SKILLS SECTION -->
+        <section id="skills" class="skills reveal">
+            <h2 class="section-title">Arsenal <span class="highlight">Técnico</span></h2>
+
+            <div class="skills-container">
+                <div class="skill-category">
+                    <div class="skill-header">
+                        <i class="fa-solid fa-code"></i>
+                        <h3>Lenguajes & Frameworks</h3>
+                    </div>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Java</span>
+                        <span class="skill-tag">Spring Boot</span>
+                        <span class="skill-tag">PHP</span>
+                        <span class="skill-tag">Laravel</span>
+                        <span class="skill-tag">Axon Framework</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <div class="skill-header">
+                        <i class="fa-solid fa-database"></i>
+                        <h3>Bases de Datos & Infra</h3>
+                    </div>
+                    <div class="skill-tags">
+                        <span class="skill-tag">PostgreSQL</span>
+                        <span class="skill-tag">MariaDB</span>
+                        <span class="skill-tag">Docker</span>
+                        <span class="skill-tag">Vercel</span>
+                        <span class="skill-tag">Git / CI/CD</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <div class="skill-header">
+                        <i class="fa-solid fa-sitemap"></i>
+                        <h3>Arquitectura & Conceptos</h3>
+                    </div>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Event-Driven Architecture</span>
+                        <span class="skill-tag">CQRS & Event Sourcing</span>
+                        <span class="skill-tag">Microservicios</span>
+                        <span class="skill-tag">APIs RESTful</span>
+                        <span class="skill-tag">Webhooks Integration</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT SECTION -->
+        <section id="contacto" class="contact reveal">
+            <div class="contact-card">
+                <h2>¿Listo para escalar tu próximo sistema?</h2>
+                <p>Estoy disponible para discutir arquitecturas, integraciones complejas o nuevas oportunidades
+                    profesionales.</p>
+
+                <a href="mailto:diossmer@gmail.com" class="btn btn-primary btn-large">
+                    <i class="fa-solid fa-envelope"></i> Diossmer@gmail.com
+                </a>
+
+                <p class="phone-text"><i class="fa-solid fa-phone"></i> +58 412-5875555</p>
+
+                <div class="contact-socials">
+                    <a href="https://www.linkedin.com/in/diossmer-villamizar-56bba879/" target="_blank"><i
+                            class="fa-brands fa-linkedin"></i> LinkedIn</a>
+                    <a href="https://github.com/Diossmer" target="_blank"><i class="fa-brands fa-github"></i> GitHub</a>
+                    <a href="https://gitlab.com/Diossmer" target="_blank"><i class="fa-brands fa-gitlab"></i> GitLab</a>
+                </div>
+
+                <div class="qr-section">
+                    <p>Conecta conmigo al instante:</p>
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://www.linkedin.com/in/diossmer-villamizar-56bba879/&color=00e5ff&bgcolor=141414"
+                        alt="LinkedIn QR Code" class="qr-image">
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Diossmer Villamizar. Diseñado con foco en el rendimiento.</p>
+    </footer>
+
+    <!-- Mermaid.js para los diagramas de arquitectura -->
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark',
+            fontFamily: 'Inter',
+            sequence: {
+                showSequenceNumbers: true,
+            }
+        });
+    </script>
+    <script src="script.js"></script>
+</body>
+
+</html>
